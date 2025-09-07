@@ -13,6 +13,15 @@ export default [
 		files: ["src/process/**/*.{js,mjs,cjs,ts}"],
 		languageOptions: { globals: globals.node },
 	},
+	{
+		files: ["src/daemon/**/*.{js,mjs,cjs,ts}", "src/ndoc/**/*.{js,mjs,cjs,ts}"],
+		languageOptions: { 
+			globals: {
+				...globals.node,
+				fetch: "readonly",
+			}
+		},
+	},
 	pluginJs.configs.recommended,
 	...tseslint.configs.recommended,
 	{
@@ -21,8 +30,11 @@ export default [
 				"error",
 				{
 					caughtErrors: "none",
+					argsIgnorePattern: "^_",
+					varsIgnorePattern: "^_",
 				},
 			],
+			"no-case-declarations": "off",
 		},
 	},
 ];
