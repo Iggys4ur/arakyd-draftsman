@@ -89,7 +89,7 @@ export class DaemonServer {
 		});
 
 		// Add services to request context
-		this.app.use((req, res, next) => {
+		this.app.use((req, _res, next) => {
 			req.services = this.services;
 			next();
 		});
@@ -129,7 +129,7 @@ export class DaemonServer {
 	 * Setup error handling
 	 */
 	setupErrorHandling() {
-		this.app.use((error, req, res, next) => {
+		this.app.use((error, req, res, _next) => {
 			logger.error(`Request ${req.id} error:`, error);
 
 			// Default error response
@@ -167,7 +167,7 @@ export class DaemonServer {
 	setupWebSocket() {
 		this.wss = new WebSocketServer({ server: this.server, path: "/ws" });
 
-		this.wss.on("connection", (ws, request) => {
+		this.wss.on("connection", (ws, _request) => {
 			const clientId = Math.random().toString(36).substr(2, 9);
 			ws.clientId = clientId;
 			this.clients.add(ws);

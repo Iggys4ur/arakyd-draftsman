@@ -86,7 +86,6 @@ export class DockerOrchestrator {
 			tag = this.config.defaultTag,
 			ports = {},
 			environment = {},
-			volumes = [],
 			enableTelemetry = false
 		} = options;
 
